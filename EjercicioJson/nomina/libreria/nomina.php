@@ -37,8 +37,8 @@ class Nomina {
     }
 
     public function calSubTransporte(){
-        $smn = 1300000;
-        if($this->salario<($smn*2)){
+        $salarioP = 1300000;
+        if($this->salario<($salarioP*2)){
             $this->subTransporte=114000;
         }else{
             $this->subTransporte =0;
@@ -46,8 +46,8 @@ class Nomina {
         return $this->subTransporte;
     }
     public function calRetencion(){
-        $smn = 1300000;
-        if($this->salario>($smn*4)){
+        $salarioP = 1300000;
+        if($this->salario>($salarioP*4)){
             $this->retencion=$this->salario*0.04;
         }else{
             $this->retencion =0;

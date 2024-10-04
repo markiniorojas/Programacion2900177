@@ -1,22 +1,27 @@
 <?php
-include('libreria/valores.php');
-include('libreria/nomina.php');
+include('valores.php');
+include('nomina.php');
 
-$valores = new Datos(30, 50000);
+$data = json_decode(file_get_contents("php://input"), true);
+if (!isset($data['diasTrabajados']) || !isset($data['valorDia'])) {
+    echo json_encode(['error' => 'Faltan datos.']);
+    exit;
+}
+
+$valores = new Datos($data['diasTrabajados'], $data['valorDia']);
 $nomina = new Nomina($valores);
 
-$response = [];
+$response = [
+    'salario' => $nomina->calSalario(),
+    'salud' => $nomina->calSalud(),
+    'pension' => $nomina->calPension(),
+    'arl' => $nomina->calArl(),
+    'descuento' => $nomina->descuento(),
+    'subTransporte' => $nomina->calSubTransporte(),
+    'retencion' => $nomina->calRetencion(),
+    'pagoTotal' => $nomina->calPagoTotal(),
+];
 
-$response['salario'] = $nomina->calSalario();
-$response['salud'] = $nomina->calSalud();
-$response['pension'] = $nomina->calPension();
-$response['arl'] = $nomina->calArl();
-$response['descuento'] = $nomina->descuento();
-$response['subTransporte'] = $nomina->calSubTransporte();
-$response['retencion'] = $nomina->calRetencion();
-$response['pagoTotal'] = $nomina->calPagoTotal();
-
-header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
 echo json_encode($response);
-
 ?>
