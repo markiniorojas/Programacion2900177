@@ -1,10 +1,8 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     fetch('libreria/resultado.php')
         .then(response => response.json())
         .then(data => {
-            console.log('Resultado de las operaciones:', data);
-            
+            console.log('Resultado de las operaciones:', data);   
          
             document.getElementById('suma').textContent = `Suma: ${data.suma}`;
             document.getElementById('resta').textContent = `Resta: ${data.resta}`;

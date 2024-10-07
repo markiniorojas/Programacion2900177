@@ -1,27 +1,26 @@
 <?php
-include('valores.php');
+
 include('nomina.php');
 
-$data = json_decode(file_get_contents("php://input"), true);
-if (!isset($data['diasTrabajados']) || !isset($data['valorDia'])) {
-    echo json_encode(['error' => 'Faltan datos.']);
-    exit;
-}
+$valores = new nomina();
 
-$valores = new Datos($data['diasTrabajados'], $data['valorDia']);
-$nomina = new Nomina($valores);
+$valores->setTotalDias(30);
+$valores->setValorDia(30000);
 
-$response = [
-    'salario' => $nomina->calSalario(),
-    'salud' => $nomina->calSalud(),
-    'pension' => $nomina->calPension(),
-    'arl' => $nomina->calArl(),
-    'descuento' => $nomina->descuento(),
-    'subTransporte' => $nomina->calSubTransporte(),
-    'retencion' => $nomina->calRetencion(),
-    'pagoTotal' => $nomina->calPagoTotal(),
+
+
+
+$dataJson = [
+    'salario' => $valores->calSalario(),
+    'salud' => $valores->calSalud(),
+    'pension' => $valores->calPension(),
+    'arl' => $valores->calArl(),
+    'descuento' => $valores->descuento(),
+    'subTransporte' => $valores->calSubTransporte(),
+    'retencion' => $valores->calRetencion(),
+    'pagoTotal' => $valores->calPagoTotal(),
 ];
 
-header('Access-Control-Allow-Origin: *');
-echo json_encode($response);
+header('Content-Type: application/json');
+echo json_encode($dataJson);
 ?>

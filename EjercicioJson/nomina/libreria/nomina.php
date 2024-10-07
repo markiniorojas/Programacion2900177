@@ -1,7 +1,8 @@
 <?php
+    include('valores.php');
 
-class Nomina {
-    private $valor;
+class nomina extends valores {
+
     public $salario;
     public $salud;
     public $pension;
@@ -11,32 +12,35 @@ class Nomina {
     public $retencion;
     public $pagoTotal;
 
-    public function __construct(Datos $valor){
-        $this->valor = $valor;
-    }
-
+    
     public function calSalario(){
-        $this->salario = $this->valor->getTotalDias() * $this->valor->getValorDia();
+
+        $this->salario = $this->getTotalDias() * $this->getValorDia();
         return $this->salario;
     }
     public function calSalud(){
+
         $this->salud = $this->salario * 0.12;
         return $this->salud;
     }
     public function calPension(){
+
         $this->pension = $this->salario * 0.16;
         return $this->pension;
     }    
     public function calArl(){
+
         $this->arl = $this->salario * 0.052;
         return $this->arl;
     }
     public function descuento(){
+
         $this->descuento = $this->salud + $this->pension+ $this->arl;
         return $this->descuento;
     }
 
     public function calSubTransporte(){
+
         $salarioP = 1300000;
         if($this->salario<($salarioP*2)){
             $this->subTransporte=114000;
@@ -46,6 +50,7 @@ class Nomina {
         return $this->subTransporte;
     }
     public function calRetencion(){
+
         $salarioP = 1300000;
         if($this->salario>($salarioP*4)){
             $this->retencion=$this->salario*0.04;
@@ -56,6 +61,7 @@ class Nomina {
     }
 
     public function calPagoTotal(){
+        
         $this->pagoTotal = ($this->salario + $this->subTransporte) - ($this->descuento + $this->retencion);
         return $this->pagoTotal;
     }

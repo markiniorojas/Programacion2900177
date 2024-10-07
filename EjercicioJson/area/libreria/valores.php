@@ -1,45 +1,59 @@
 <?php
-class Valores
-{
+class valores{
     private $lado;
-    private $base;
-    private $altura;
+    private $baser;
+    private $alturar;
+    private $baset;
+    private $alturat;
 
-    public function __construct($lado, $base, $altura)
-    {
+    public function __construct(){
+        $this->lado = 0;
+        $this->baser = 0;
+        $this->alturar = 0;
+        $this->baset = 0;
+        $this->alturat = 0;
+    }
+
+    public function setLado($lado){
         $this->lado = $lado;
-        $this->base = $base;
-        $this->altura = $altura;
     }
 
-    public function setLado($lado)
-    {
-        $this->lado = $lado;
-    }
-
-    public function setBase($base)
-    {
-        $this->base = $base;
-    }
-
-    public function setAltura($altura)
-    {
-        $this->altura = $altura;
-    }
-
-    public function getLado()
-    {
+    public function getLado(){
         return $this->lado;
     }
 
-    public function getBase()
-    {
-        return $this->base;
+
+    public function setBaser($baser){
+        $this->baser = $baser;
     }
 
-    public function getAltura()
-    {
-        return $this->altura;
+    public function getBaser(){
+        return $this->baser;
+    }
+
+    public function setAlturar($alturar){
+        $this->alturar = $alturar;
+    }
+
+    public function getAlturar(){
+        return $this->alturar;
+    }
+
+    public function setBaset($baset){
+        $this->baset = $baset;
+    }
+
+    public function getBaset(){
+        return $this->baset;
+    }
+
+    
+    public function setAlturat($alturat){
+        $this->alturat = $alturat;
+    }
+
+    public function getAlturat(){
+        return $this->alturat;
     }
 }
 ?>
